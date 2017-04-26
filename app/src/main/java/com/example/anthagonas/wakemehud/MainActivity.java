@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         // Ajout des differents fragments
         T bob = (T) new Heure();
         T notif = (T) new Notifications();
-        T meteo = (T) new Meteo();
+        T meteo = (T) new WeatherFragment();
         T rss = (T) new Rss();
         T agenda = (T) new Agenda();
         T agregateur = (T) new Agregateur();
