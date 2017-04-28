@@ -21,9 +21,9 @@ public class RssListListener implements OnItemClickListener
     List<RssItem>listItems;
     Fragment activity;
 
-    public RssListListener(List<RssItem>listItems,Fragment activity)
+    public RssListListener(List<RssItem>itemList,Fragment activity)
     {
-        this.listItems=listItems;
+        this.listItems=itemList;
         this.activity=activity;
     }
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
