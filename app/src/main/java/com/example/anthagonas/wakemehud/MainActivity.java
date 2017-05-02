@@ -45,7 +45,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         fragmentList.add(bob);
         fragmentList.add(notif);
         fragmentList.add(meteo);
-        fragmentList.add(rss);
+        //fragmentList.add(rss);
         fragmentList.add(agenda);
         fragmentList.add(agregateur);
 
@@ -61,19 +61,6 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             }
         });
 
-/*      LA FONCTION SWIPE REMPLACE CE BOUTON
-        Button suivant = (Button) findViewById(R.id.suivant) ;
-        suivant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                fragmentListPosition = (fragmentListPosition+1)%fragmentList.size(); // se déplace dans la liste des fragments
-                FragmentTransaction fragmentManager= getSupportFragmentManager().beginTransaction();
-                fragmentManager.replace(R.id.framelayout, fragmentList.get(fragmentListPosition)); // Remplace le fragment actuel par le suivant dans la liste
-                fragmentManager.commit();
-            }
-        });
-        */
 
         Button parametres = (Button) findViewById(R.id.parametres);
         parametres.setOnClickListener(new View.OnClickListener() {
