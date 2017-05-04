@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,9 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         //recuperation de l'etat de la batterie
         registerReceiver(infos_batterie, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
+        //Ajout du fragment rss :
+
+
         // Ajout des differents fragments
         T bob = (T) new Heure();
         T notif = (T) new Notifications();
@@ -60,20 +64,6 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
                 layout.setScaleY(-layout.getScaleY()); // retourne le framelayout ( et donc le fragment affiché)
             }
         });
-
-/*      LA FONCTION SWIPE REMPLACE CE BOUTON
-        Button suivant = (Button) findViewById(R.id.suivant) ;
-        suivant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                fragmentListPosition = (fragmentListPosition+1)%fragmentList.size(); // se déplace dans la liste des fragments
-                FragmentTransaction fragmentManager= getSupportFragmentManager().beginTransaction();
-                fragmentManager.replace(R.id.framelayout, fragmentList.get(fragmentListPosition)); // Remplace le fragment actuel par le suivant dans la liste
-                fragmentManager.commit();
-            }
-        });
-        */
 
         Button parametres = (Button) findViewById(R.id.parametres);
         parametres.setOnClickListener(new View.OnClickListener() {
