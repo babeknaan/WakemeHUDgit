@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,9 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
 
         //recuperation de l'etat de la batterie
         registerReceiver(infos_batterie, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        //Ajout du fragment rss :
+
 
         // Ajout des differents fragments
         T bob = (T) new Heure();

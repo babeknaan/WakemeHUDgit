@@ -1,101 +1,86 @@
 package com.example.anthagonas.wakemehud;
 
+/**
+ * Created by vtrjd on 04/05/2017.
+ */
 
+import android.util.Xml;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler; // Parser cree pour trier les elements xml via sax2
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by vtrjd on 25/04/2017.
- */
+public class RssParser {
 
-public class RssParser extends DefaultHandler {
+    private static final String TAG_TITLE = "title";
+    private static final String TAG_LINK = "link";
+    private static final String TAG_RSS = "rss";
 
-    private List<RssItem>rssItems;
+    // We don't use namespaces
+    private final String ns = null;
 
-    //item de reference pour le parsing
-    private RssItem currentItem;
-
-    //indicateur pour le titre
-    private boolean parsingTitle;
-
-    //indicateur pour le lien
-    private boolean parsingLink;
-
-    //constructeur
-    public RssParser()
-    {
-        rssItems=new ArrayList<RssItem>();
-    }
-
-    //retourne la liste du parser
-    public List<RssItem> getItems()
-    {
-        return rssItems;
-    }
-
-    //est execute quand le parser lit un opening tag
-    @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        //cree un item rss vide quand le parser voit un opening tag
-        if("item".equals(qName))
-        {
-            currentItem=new RssItem();
-        }
-        //set quand l'opening tag "title" est lu par le parser (pour ouvrir)
-        else if("title".equals(qName))
-        {
-            parsingTitle=true;
-        }
-        //set quand l'opening tag "link" est lu par le parser (pour ouvrir)
-        else if("link".equals(qName))
-        {
-            parsingLink=true;
+    public List<ObjetRss> parse(InputStream inputStream) throws XmlPullParserException, IOException {
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(inputStream, null);
+            parser.nextTag();
+            return readFeed(parser);
+        } finally {
+            inputStream.close();
         }
     }
 
-    //est execute quand le parser lit un closing tag
-    @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        //ajoute l'item a la liste lorsqu'un closing tag est lu
-        if("item".equals(qName))
-        {
-            rssItems.add(currentItem);
-            currentItem=null;
-        }
-        //set quand le closing tag "title" est lu par le parser (pour refermer)
-        else if("title".equals(qName))
-        {
-            parsingTitle=false;
-        }
-        //set quand le closing tag "link" est lu par le parser (pour refermer)
-        else if("link".equals(qName))
-        {
-            parsingLink = false;
-        }
-    }
-
-    //execute lorsque le parser lit le contenu du tag
-    @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
-        //donne les donnees a l'objet item entre les balises
-        if(parsingTitle)
-        {
-            if (currentItem != null) {
-                currentItem.setTitle(new String(ch, start, length));
+    private List<ObjetRss> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
+        parser.require(XmlPullParser.START_TAG, null, TAG_RSS);
+        String title = null;
+        String link = null;
+        List<ObjetRss> items = new ArrayList<ObjetRss>();
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if (name.equals(TAG_TITLE)) {
+                title = readTitle(parser);
+            } else if (name.equals(TAG_LINK)) {
+                link = readLink(parser);
+            }
+            if (title != null && link != null) {
+                ObjetRss item = new ObjetRss(title, link);
+                items.add(item);
+                title = null;
+                link = null;
             }
         }
-        else if (parsingLink)
-        {
-            if(currentItem!=null)
-            {
-                currentItem.setLink(new String(ch,start,length));
-                parsingLink=false;
-            }
+        return items;
+    }
+
+    private String readLink(XmlPullParser parser) throws XmlPullParserException, IOException {
+        parser.require(XmlPullParser.START_TAG, ns, TAG_LINK);
+        String link = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, TAG_LINK);
+        return link;
+    }
+
+    private String readTitle(XmlPullParser parser) throws XmlPullParserException, IOException {
+        parser.require(XmlPullParser.START_TAG, ns, TAG_TITLE);
+        String title = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, TAG_TITLE);
+        return title;
+    }
+
+    // For the tags title and link, extract their text values.
+    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String result = "";
+        if (parser.next() == XmlPullParser.TEXT) {
+            result = parser.getText();
+            parser.nextTag();
         }
+        return result;
     }
 }
