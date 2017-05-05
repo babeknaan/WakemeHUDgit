@@ -37,27 +37,22 @@ public class Agenda extends Fragment {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
         this.listView = (ListView) view.findViewById(R.id.evenements);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
-<<<<<<< HEAD
-        gridView.setAdapter(adapter);
-        gridView.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                return ((MainActivity)getActivity()).onTouchEvent(event);
-=======
-        //TODO : Trouver pourquoi le swipe ne marche plus sur cette liste
         listView.setAdapter(adapter);
-        listView.setOnTouchListener(new View.OnTouchListener()
-        {
+        listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return ((MainActivity)getActivity()).onTouchEvent(event);
+            public boolean onTouch(View v, MotionEvent event) {
+                return ((MainActivity) getActivity()).onTouchEvent(event);
+                //TODO : Trouver pourquoi le swipe ne marche plus sur cette liste
+                listView.setAdapter(adapter);
+                listView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return ((MainActivity) getActivity()).onTouchEvent(event);
 
->>>>>>> 64e7e7d2d5e366089410badef45e300a35dcdf61
+                    }
+                });
             }
         });
         return view;
-
     }
 }
