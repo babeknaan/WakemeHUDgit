@@ -26,12 +26,36 @@ public class Rss extends Fragment implements OnItemClickListener {
     private ListView listView;
 
     @Override
+<<<<<<< HEAD
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rss, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         listView.setOnTouchListener(new View.OnTouchListener()
+=======
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view=inflater.inflate(R.layout.fragment_rss, container, false);
+        try
+        {
+            RssReader rssReader=new RssReader("http://www.itcuties.com/feed/");
+            ListView listeItems = (ListView) getView().findViewById(R.id.listview);
+            ArrayAdapter<RssItem> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.list_content,rssReader.getItems());
+            listeItems.setAdapter(adapter);
+            listeItems.setOnTouchListener(new View.OnTouchListener()
+            {
+                @Override
+                public boolean onTouch(View v, MotionEvent event)
+                {
+                    return ((MainActivity)getActivity()).onTouchEvent(event);
+
+                }
+            });
+            listeItems.setOnItemClickListener(new RssListListener(rssReader.getItems(), this));
+        }
+        catch (Exception e)
+>>>>>>> 64e7e7d2d5e366089410badef45e300a35dcdf61
         {
             @Override
             public boolean onTouch(View v, MotionEvent event){

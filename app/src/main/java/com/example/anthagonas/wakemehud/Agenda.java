@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import java.util.List;
  */
 
 public class Agenda extends Fragment {
-    GridView gridView;
+    ListView listView;
 
     static final String[] numbers = new String[] {
             "A", "B", "C", "D", "E",
@@ -34,14 +35,26 @@ public class Agenda extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        this.gridView = (GridView) view.findViewById(R.id.gridView1);
+        this.listView = (ListView) view.findViewById(R.id.evenements);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
+<<<<<<< HEAD
         gridView.setAdapter(adapter);
         gridView.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event){
                 return ((MainActivity)getActivity()).onTouchEvent(event);
+=======
+        //TODO : Trouver pourquoi le swipe ne marche plus sur cette liste
+        listView.setAdapter(adapter);
+        listView.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return ((MainActivity)getActivity()).onTouchEvent(event);
+
+>>>>>>> 64e7e7d2d5e366089410badef45e300a35dcdf61
             }
         });
         return view;

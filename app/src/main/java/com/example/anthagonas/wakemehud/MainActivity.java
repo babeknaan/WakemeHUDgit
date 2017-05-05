@@ -49,7 +49,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         fragmentList.add(bob);
         fragmentList.add(notif);
         fragmentList.add(meteo);
-        fragmentList.add(rss);
+        //fragmentList.add(rss);
         fragmentList.add(agenda);
         fragmentList.add(agregateur);
 
@@ -65,6 +65,10 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64e7e7d2d5e366089410badef45e300a35dcdf61
         Button parametres = (Button) findViewById(R.id.parametres);
         parametres.setOnClickListener(new View.OnClickListener() {
             @Override
