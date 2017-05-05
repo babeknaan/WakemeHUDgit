@@ -100,6 +100,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         finish();
     }
 
+    //Swipe entre les different fragments
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
