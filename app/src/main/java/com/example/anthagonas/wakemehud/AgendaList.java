@@ -30,7 +30,7 @@ public class AgendaList {
     ArrayList<String> agendas = new ArrayList<String>();
 
 
-    public void CalendarContentResolver(Context ctx) {
+    public AgendaList(Context ctx) {
         contentResolver = ctx.getContentResolver();
     }
 
@@ -47,7 +47,6 @@ public class AgendaList {
                 }
             }
         } catch (AssertionError ex) { /*TODO: creer un log d'erreur*/ }
-
         return agendas;
     }
 
