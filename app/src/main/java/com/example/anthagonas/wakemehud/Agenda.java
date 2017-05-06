@@ -42,17 +42,8 @@ public class Agenda extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return ((MainActivity) getActivity()).onTouchEvent(event);
-                //TODO : Trouver pourquoi le swipe ne marche plus sur cette liste
-                listView.setAdapter(adapter);
-                listView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return ((MainActivity) getActivity()).onTouchEvent(event);
-
                     }
                 });
-            }
-        });
         return view;
     }
 }
