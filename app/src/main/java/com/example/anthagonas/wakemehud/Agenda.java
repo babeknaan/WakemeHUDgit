@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 public class Agenda extends Fragment {
     GridView gridView;
+    AgendaList evenements;
 
     static final String[] numbers = new String[] {
             "A", "B", "C", "D", "E",
@@ -30,7 +31,9 @@ public class Agenda extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        this.gridView = (GridView) view.findViewById(R.id.listView);
+        this.evenements = new AgendaList(this.getContext());
+        //this.evenements.majList();
+        this.gridView = (GridView) view.findViewById(R.id.gridView1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
         gridView.setAdapter(adapter);
         gridView.setOnTouchListener(new View.OnTouchListener()
