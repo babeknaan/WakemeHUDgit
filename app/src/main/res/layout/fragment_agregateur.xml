@@ -5,23 +5,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <fragment
-        android:name="com.teamhud.wakemehud.Fragments.Heure"
+        android:name="com.example.anthagonas.wakemehud.Heure"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="50"
         android:id="@+id/fragment_heure"
         android:layout_weight="25">
     </fragment>
     <fragment
-        android:name="com.teamhud.wakemehud.Fragments.Weather"
+        android:name="com.example.anthagonas.wakemehud.Weather"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="50"
         android:id="@+id/fragment_weather"
         android:layout_weight="25">
     </fragment>
     <fragment
-        android:name="com.teamhud.wakemehud.Fragments.Agenda"
+        android:name="com.example.anthagonas.wakemehud.Agenda"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="50"
         android:id="@+id/fragment_agenda"
         android:layout_weight="50">
     </fragment>
