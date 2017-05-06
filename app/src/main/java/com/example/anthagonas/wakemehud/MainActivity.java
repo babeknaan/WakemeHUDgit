@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +48,7 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
         fragmentList.add(bob);
         fragmentList.add(notif);
         fragmentList.add(meteo);
-        //fragmentList.add(rss);
+        fragmentList.add(rss);
         fragmentList.add(agenda);
         fragmentList.add(agregateur);
 
@@ -65,10 +64,8 @@ public class MainActivity <T extends Fragment> extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 64e7e7d2d5e366089410badef45e300a35dcdf61
+
         Button parametres = (Button) findViewById(R.id.parametres);
         parametres.setOnClickListener(new View.OnClickListener() {
             @Override

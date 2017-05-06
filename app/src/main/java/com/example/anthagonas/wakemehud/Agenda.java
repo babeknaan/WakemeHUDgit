@@ -24,6 +24,7 @@ import java.util.List;
 
 public class Agenda extends Fragment {
     ListView listView;
+    AgendaList listeEvenements = new AgendaList(this.getContext());
 
     static final String[] numbers = new String[] {
             "A", "B", "C", "D", "E",
