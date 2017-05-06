@@ -1,22 +1,13 @@
 package com.example.anthagonas.wakemehud;
 
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by anthagonas on 29/03/17.
