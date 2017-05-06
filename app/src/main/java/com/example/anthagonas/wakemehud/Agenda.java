@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 /**
@@ -14,7 +15,7 @@ import android.widget.ListView;
  */
 
 public class Agenda extends Fragment {
-    ListView listView;
+    GridView listView;
     AgendaList listeEvenements = new AgendaList(this.getContext());
 
     static final String[] numbers = new String[] {
@@ -27,8 +28,8 @@ public class Agenda extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-        this.listView = (ListView) view.findViewById(R.id.evenements);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
+        this.listView = (GridView) view.findViewById(R.id.evenements);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.list_content, numbers);
         listView.setAdapter(adapter);
         listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
