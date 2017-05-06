@@ -32,7 +32,7 @@ public class Agenda extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
         this.evenements = new AgendaList(this.getContext());
-        //this.evenements.majList();
+        this.evenements.majList();
         this.gridView = (GridView) view.findViewById(R.id.gridView1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1, numbers);
         gridView.setAdapter(adapter);

@@ -25,7 +25,7 @@ public class AgendaList {
 
 
     //un parser URI permettant de recuperer tout les calendriers synchronises avec l'appareil
-    public static final Uri URI_parser = Uri.parse("content://com.android.calendar/calendars"); // Pour l'API 2.2 et plus
+    public static final Uri URI_parser = Uri.parse("content://com.android.calendar/events"); // Pour l'API 2.2 et plus
 
 
     //Creation d'un contentResolver, qui permet d'acceder aux valeurs des calendriers
@@ -38,36 +38,40 @@ public class AgendaList {
 
     //Constructeur de la classe
     public AgendaList(Context ctx) {
-        Log.d("constructor", "creation contentResolver ");
         contentResolver = ctx.getContentResolver();
     }
 
     public void majList() {
-        String TAG = "Majlist()";
         // Recupere la liste de tout les evenements des agendas synchronises avec l'appareil
-        Log.d(TAG, "creation cursor ");
-        Cursor cursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
+        Cursor eventCursor = contentResolver.query(URI_parser, CHAMPS, null, null, null);
 
         try {
-            Log.d(TAG, "cursor getcount ");
-            if (cursor.getCount() > 0) {
-                //Pour chaque element du curseur (donc chaque agenda)
-                Log.d(TAG, "while");
-                while (cursor.moveToNext()) {
-                    Log.d(TAG, "loop ");
-                    String idEvent = cursor.getString(0);
-                    String date = cursor.getString(1);
-                    String duree = cursor.getString(2);
-                    Log.d(TAG, "adds");
+            if (eventCursor.getCount() > 0) {
+                eventCursor.moveToFirst();
+                nomEvenement.add(eventCursor.getString(0));
+                dateDepartEvenement.add(eventCursor.getString(1));
+                dureeEvenement.add(eventCursor.getString(2));
+                //Pour chaque element du curseur (donc chaque evenement)
+                while (eventCursor.moveToNext()) {
+                    String idEvent = eventCursor.getString(0);
+                    String date = eventCursor.getString(1);
+                    String duree = eventCursor.getString(2);
                     nomEvenement.add(idEvent); // recuperation du nom de l'evenement
                     dateDepartEvenement.add(date); // recuperation de la date de depart
                     dureeEvenement.add(duree); // recuperation de la duree de l'evenement
                 }
             }
-        } catch (AssertionError ex) { /*TODO: creer un log d'erreur*/ }
-
-        Log.d(TAG, "fin maj ");
+            else
+            {
+                nomEvenement.add("Aucun Evenement");
+                dateDepartEvenement.add(" ");
+                dureeEvenement.add(" ");
+            }
+        } catch (AssertionError ex) {Log.e("AssertionError","Bug majList() :",ex);}
+        eventCursor.close();
     }
+
+    //getters
     public ArrayList<String > getNomEvenement()
     {
         return nomEvenement;
