@@ -7,22 +7,22 @@
     <fragment
         android:name="com.example.anthagonas.wakemehud.Heure"
         android:layout_width="0dp"
-        android:layout_height="50"
+        android:layout_height="25"
         android:id="@+id/fragment_heure"
-        android:layout_weight="25">
+        android:layout_weight="match_parent">
     </fragment>
     <fragment
         android:name="com.example.anthagonas.wakemehud.Weather"
         android:layout_width="0dp"
-        android:layout_height="50"
+        android:layout_height="25"
         android:id="@+id/fragment_weather"
-        android:layout_weight="25">
+        android:layout_weight="match_parent">
     </fragment>
     <fragment
         android:name="com.example.anthagonas.wakemehud.Agenda"
         android:layout_width="0dp"
         android:layout_height="50"
         android:id="@+id/fragment_agenda"
-        android:layout_weight="50">
+        android:layout_weight="match_parent">
     </fragment>
 </FrameLayout>
